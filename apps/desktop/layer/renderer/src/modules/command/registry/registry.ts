@@ -32,9 +32,11 @@ export const CommandRegistry = new (class {
     }
     const command = createCommand(options)
     this.commands.set(command.id, command)
+    console.info(`Command ${options.id} created.`)
 
     return () => {
       this.commands.delete(command.id)
+      console.info(`Command ${options.id} deleted.`)
     }
   }
 

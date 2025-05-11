@@ -267,6 +267,11 @@ const useRegisterObsidianCommands = () => {
   const obsidianVaultPath = useIntegrationSettingKey("obsidianVaultPath")
   const isObsidianAvailable = enableObsidian && !!obsidianVaultPath
 
+  console.info("Obsidian integration status:", {
+    enableObsidian,
+    obsidianVaultPath,
+  })
+
   const saveToObsidian = useMutation({
     mutationKey: ["save-to-obsidian"],
     mutationFn: async (data: {
@@ -309,6 +314,10 @@ const useRegisterObsidianCommands = () => {
             tracker.integration({
               type: "obsidian",
               event: "save",
+            })
+            console.info("Obsidian trigger status:", {
+              enableObsidian,
+              obsidianVaultPath,
             })
             saveToObsidian.mutate({
               url: entry.entries.url || "",
